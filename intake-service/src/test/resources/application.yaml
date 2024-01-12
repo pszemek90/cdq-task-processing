@@ -1,0 +1,6 @@
+kafka:
+  task:
+    topic:
+      name: task-topic
+      partitions: 1
+      replication-factor: 1
