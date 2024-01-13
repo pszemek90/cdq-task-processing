@@ -17,6 +17,8 @@
 		<java.version>17</java.version>
 		<spring-kafka.version>3.1.1</spring-kafka.version>
 		<task-processing-model.version>1.0-SNAPSHOT</task-processing-model.version>
+		<task-processing-database.version>0.0.1-SNAPSHOT</task-processing-database.version>
+		<postgresql.version>42.7.1</postgresql.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -32,6 +34,16 @@
 			<groupId>com.cdq.taskprocessing</groupId>
 			<artifactId>task-processing-model</artifactId>
 			<version>${task-processing-model.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.cdq.taskprocessing</groupId>
+			<artifactId>task-processing-database</artifactId>
+			<version>${task-processing-database.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
