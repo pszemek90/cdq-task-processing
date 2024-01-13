@@ -1,0 +1,6 @@
+kafka:
+  task:
+    topic:
+      name: task-topic
+    consumer:
+      group-id: test-group-id
