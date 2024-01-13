@@ -1,6 +1,6 @@
 package com.cdq.taskprocessing.intakeservice.service;
 
-import com.cdq.taskprocessing.intakeservice.database.dao.TaskDao;
+import com.cdq.taskprocessing.database.dao.TaskDao;
 import com.cdq.taskprocessing.model.TaskMessage;
 import org.springframework.stereotype.Service;
 
