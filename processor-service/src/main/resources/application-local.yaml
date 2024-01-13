@@ -1,0 +1,21 @@
+server:
+  port: 8081
+spring:
+  kafka:
+    bootstrap-servers: localhost:9094
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskdb
+    username: postgres
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+kafka:
+  task:
+    topic:
+      name: task-topic
+    consumer:
+      group-id: task-consumer-group
