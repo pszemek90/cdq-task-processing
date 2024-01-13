@@ -1,6 +1,7 @@
 package com.cdq.taskprocessing.intakeservice.service;
 
 import com.cdq.taskprocessing.intakeservice.database.dao.TaskDao;
+import com.cdq.taskprocessing.model.TaskMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class TaskService {
 
     public UUID createTask(String input, String pattern) {
         UUID taskId = taskDao.createTask(input, pattern);
-        kafkaProducerService.sendMessage(taskId.toString());
+        kafkaProducerService.sendMessage(new TaskMessage(taskId, input, pattern));
         return taskId;
     }
 }

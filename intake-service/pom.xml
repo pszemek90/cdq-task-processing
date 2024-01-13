@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-kafka.version>3.1.1</spring-kafka.version>
+		<task-processing-model.version>1.0-SNAPSHOT</task-processing-model.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,6 +27,11 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 			<version>${spring-kafka.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.cdq.taskprocessing</groupId>
+			<artifactId>task-processing-model</artifactId>
+			<version>${task-processing-model.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
