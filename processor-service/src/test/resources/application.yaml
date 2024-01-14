@@ -6,4 +6,4 @@ kafka:
       group-id: test-group-id
 app:
   task:
-    delay: ${TASK_DELAY:1000}
+    delay: ${TASK_DELAY:1}
