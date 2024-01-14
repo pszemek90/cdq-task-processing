@@ -1,12 +1,10 @@
 package com.cdq.taskprocessing.intakeservice.controller;
 
 import com.cdq.taskprocessing.intakeservice.model.CreateTaskRequest;
+import com.cdq.taskprocessing.intakeservice.model.Tasks;
 import com.cdq.taskprocessing.intakeservice.service.TaskService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.UUID;
@@ -25,5 +23,10 @@ public class IntakeController {
     public ResponseEntity<String> createTask(@RequestBody CreateTaskRequest request) {
         UUID uuid = taskService.createTask(request.input(), request.pattern());
         return ResponseEntity.created(URI.create("/tasks/" + uuid)).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Tasks> getAllTasks() {
+        return ResponseEntity.ok(taskService.getAllTasks());
     }
 }

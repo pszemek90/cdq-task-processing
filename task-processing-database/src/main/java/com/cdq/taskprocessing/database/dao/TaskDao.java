@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -39,6 +40,10 @@ public class TaskDao {
         taskToUpdate.setTypos(typos);
         taskToUpdate.setProgress(100);
         taskRepository.save(taskToUpdate);
+    }
+
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 
     private Task getTaskById(UUID uuid) {

@@ -1,6 +1,7 @@
 package com.cdq.taskprocessing.database.repository;
 
 import com.cdq.taskprocessing.database.entity.Task;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +20,11 @@ class TaskRepositoryTest {
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @AfterEach
+    void tearDown() {
+        taskRepository.deleteAll();
+    }
 
     @Test
     void shouldReturnTaskWithNonNullId_WhenSaveRequestSuccessful() {
@@ -50,6 +57,16 @@ class TaskRepositoryTest {
         taskFound.setProgress(10);
         Task updatedTask = taskRepository.saveAndFlush(taskFound);
         assertEquals(10, updatedTask.getProgress());
+    }
+
+    @Test
+    void shouldReturnTwoTasks_WhenTwoTasksSaved() {
+        Task task = new Task();
+        taskRepository.saveAndFlush(task);
+        Task task1 = new Task();
+        taskRepository.saveAndFlush(task1);
+        List<Task> persistedTasks = taskRepository.findAll();
+        assertEquals(2, persistedTasks.size());
     }
 
 }
