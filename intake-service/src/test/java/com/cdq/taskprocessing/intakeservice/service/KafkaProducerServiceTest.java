@@ -2,6 +2,7 @@ package com.cdq.taskprocessing.intakeservice.service;
 
 import com.cdq.taskprocessing.model.TaskMessage;
 import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -39,6 +40,7 @@ class KafkaProducerServiceTest {
     @BeforeEach
     void setUp() {
         Map<String, Object> consumerProps = KafkaTestUtils.consumerProps("test-group-id", "true", embeddedKafkaBroker);
+        consumerProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         consumer = new KafkaConsumer<>(consumerProps, new StringDeserializer(), new JsonDeserializer<>(TaskMessage.class));
         consumer.subscribe(Collections.singletonList(taskTopicName));
     }

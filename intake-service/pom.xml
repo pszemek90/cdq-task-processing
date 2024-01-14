@@ -15,7 +15,6 @@
 	<description>Intake service for task processing application</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-kafka.version>3.1.1</spring-kafka.version>
 		<task-processing-model.version>1.0-SNAPSHOT</task-processing-model.version>
 		<task-processing-database.version>0.0.1-SNAPSHOT</task-processing-database.version>
 		<postgresql.version>42.7.1</postgresql.version>
@@ -28,7 +27,6 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
-			<version>${spring-kafka.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.cdq.taskprocessing</groupId>
@@ -48,7 +46,11 @@
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka-test</artifactId>
-			<version>${spring-kafka.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
