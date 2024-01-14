@@ -3,39 +3,50 @@ package com.cdq.taskprocessing.database.dao;
 import com.cdq.taskprocessing.database.entity.Task;
 import com.cdq.taskprocessing.database.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@DataJpaTest
+@SpringBootTest
 @AutoConfigureTestDatabase
 class TaskDaoTest {
 
-    @Autowired
+    @SpyBean
     private TaskRepository taskRepository;
 
+    @InjectMocks
+    @Autowired
+    private TaskDao taskDao;
+
     @Test
-    void shouldReturnTaskWithNonNullId_WhenSaveRequestSuccessful() {
+    void shouldUpdateTaskProgress_WhenTaskFoundInDb() {
         //given
+        UUID uuid = UUID.fromString("94158c76-7614-4f94-aad4-5f0918afb5f6");
         Task task = new Task();
-        task.setInput("testInput");
-        task.setPattern("testPattern");
-        task.setCreatedDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
+        task.setId(uuid);
+        when(taskRepository.findById(uuid)).thenReturn(Optional.of(task));
         //when
-        Task savedTask = taskRepository.save(task);
+        taskDao.updateProgress(uuid, 100);
         //then
-        assertNotNull(savedTask.getId());
-        assertEquals(task.getInput(), savedTask.getInput());
-        assertEquals(task.getPattern(), savedTask.getPattern());
-        assertNotNull(savedTask.getCreatedDate());
-        assertNull(savedTask.getBestMatch());
-        assertNull(savedTask.getTypos());
-        assertNull(savedTask.getModifiedDate());
-        assertEquals(0, savedTask.getProgress());
+        verify(taskRepository).save(task);
+    }
+
+    @Test
+    void shouldThrowException_WhenTaskNotFoundInDb() {
+        //given
+        UUID uuid = UUID.fromString("94158c76-7614-4f94-aad4-5f0918afb5f6");
+        when(taskRepository.findById(uuid)).thenReturn(Optional.empty());
+        //when, then
+        assertThrows(NoSuchElementException.class, () -> taskDao.updateProgress(uuid, 100));
     }
 }

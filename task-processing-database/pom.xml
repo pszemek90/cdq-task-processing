@@ -15,7 +15,6 @@
 	<description>Database related classes</description>
 	<properties>
 		<java.version>17</java.version>
-		<h2.version>2.2.224</h2.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -25,7 +24,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

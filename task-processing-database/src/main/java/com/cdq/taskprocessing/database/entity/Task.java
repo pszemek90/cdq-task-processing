@@ -15,8 +15,8 @@ public class Task {
     private UUID id;
     private String input;
     private String pattern;
-    @Column(name = "best_match")
-    private Integer bestMatch;
+    @Column(name = "best_position")
+    private Integer bestPosition;
     private Integer typos;
     private int progress;
     @Column(name = "created_date")
@@ -48,12 +48,12 @@ public class Task {
         this.pattern = pattern;
     }
 
-    public Integer getBestMatch() {
-        return bestMatch;
+    public Integer getBestPosition() {
+        return bestPosition;
     }
 
-    public void setBestMatch(Integer bestMatch) {
-        this.bestMatch = bestMatch;
+    public void setBestPosition(Integer bestPosition) {
+        this.bestPosition = bestPosition;
     }
 
     public Integer getTypos() {
