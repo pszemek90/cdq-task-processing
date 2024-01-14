@@ -3,7 +3,9 @@ package com.cdq.taskprocessing.intakeservice.controller;
 import com.cdq.taskprocessing.intakeservice.model.CreateTaskRequest;
 import com.cdq.taskprocessing.intakeservice.model.Tasks;
 import com.cdq.taskprocessing.intakeservice.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -11,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/tasks")
+@Validated
 public class IntakeController {
 
     private final TaskService taskService;
@@ -20,7 +23,7 @@ public class IntakeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createTask(@RequestBody CreateTaskRequest request) {
+    public ResponseEntity<String> createTask(@Valid @RequestBody CreateTaskRequest request) {
         UUID uuid = taskService.createTask(request.input(), request.pattern());
         return ResponseEntity.created(URI.create("/tasks/" + uuid)).build();
     }
