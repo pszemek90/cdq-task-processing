@@ -39,7 +39,7 @@ class IntakeControllerTest {
     @Test
     void shouldReturnCreatedAndNonNullBody_WhenValidRequestMade() throws Exception {
 
-        CreateTaskRequest request = new CreateTaskRequest("testInput", "testPattern");
+        CreateTaskRequest request = new CreateTaskRequest("ABCABC", "ABC");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(request);
 
@@ -72,7 +72,7 @@ class IntakeControllerTest {
     void shouldReturnErrorResponse_WhenGenericExceptionIsThrown() throws Exception{
         when(taskService.createTask(any(), any())).thenThrow(new RuntimeException("Test exception"));
         //when
-        CreateTaskRequest request = new CreateTaskRequest("testInput", "testPattern");
+        CreateTaskRequest request = new CreateTaskRequest("ABCABC", "ABC");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(request);
 

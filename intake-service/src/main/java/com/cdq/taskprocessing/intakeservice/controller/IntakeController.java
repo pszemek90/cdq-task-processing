@@ -24,8 +24,17 @@ public class IntakeController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createTask(@Valid @RequestBody CreateTaskRequest request) {
+        validateInput(request);
         UUID uuid = taskService.createTask(request.input(), request.pattern());
         return ResponseEntity.created(URI.create("/tasks/" + uuid)).build();
+    }
+
+    private void validateInput(CreateTaskRequest request) {
+        String input = request.input();
+        String pattern = request.pattern();
+        if(pattern.length() > input.length()) {
+            throw new IllegalStateException("Pattern cannot be longer than input!");
+        }
     }
 
     @GetMapping
