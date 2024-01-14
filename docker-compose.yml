@@ -22,7 +22,7 @@ services:
       - ./init-scripts:/docker-entrypoint-initdb.d
   intake-service:
     image: taskprocessing-intake-service:0.0.1
-    restart: on-failure:3
+    restart: on-failure
     depends_on:
       - kafka
       - postgres
@@ -38,7 +38,7 @@ services:
       - TASK_TOPIC_REPLICATION_FACTOR=1
   processor-service:
     image: taskprocessing-processor-service:0.0.1
-    restart: on-failure:3
+    restart: on-failure
     depends_on:
       - kafka
       - postgres
@@ -49,5 +49,6 @@ services:
       - DB_PASSWORD=test
       - TASK_TOPIC_NAME=task-topic
       - TASK_CONSUMER_GROUP_ID=processor-consumer-group
+      - TASK_DELAY=5000
 volumes:
   postgres_data:
