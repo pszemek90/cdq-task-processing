@@ -41,3 +41,6 @@ To create a task, you need to send a payload in following format:
 As a result you will receive your newly created task with its location in Location header 
 (with the relative URL to invoke). For example - Location: /tasks/505cf6b6-0fa2-4297-8187-f6fcd4d6dcf9.
 This can be used in the third endpoint directly.
+
+GENERAL NOTE: To simulate long processing execution, a delay has been introduced in service responsible for execution.
+You can customize its amount using TASK_DELAY environment variable in docker-compose.yml.
