@@ -15,5 +15,5 @@ kafka:
   task:
     topic:
       name: ${TASK_TOPIC_NAME}
-      partitions: {TASK_TOPIC_PARTITIONS}
+      partitions: ${TASK_TOPIC_PARTITIONS}
       replication-factor: ${TASK_TOPIC_REPLICATION_FACTOR}
