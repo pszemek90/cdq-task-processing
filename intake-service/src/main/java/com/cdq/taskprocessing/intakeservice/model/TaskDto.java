@@ -60,4 +60,16 @@ public class TaskDto {
     public void setProgress(int progress) {
         this.progress = progress;
     }
+
+    @Override
+    public String toString() {
+        return "TaskDto{" +
+                "id='" + id + '\'' +
+                ", input='" + input + '\'' +
+                ", pattern='" + pattern + '\'' +
+                ", bestPosition=" + bestPosition +
+                ", typos=" + typos +
+                ", progress=" + progress +
+                '}';
+    }
 }
