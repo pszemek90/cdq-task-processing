@@ -4,6 +4,7 @@ import com.cdq.taskprocessing.database.dao.TaskDao;
 import com.cdq.taskprocessing.processorservice.model.ProcessingResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -13,6 +14,8 @@ import java.util.UUID;
 public class TaskProcessorService {
 
     private static final Logger log = LoggerFactory.getLogger(TaskProcessorService.class);
+    @Value("${app.task.delay}")
+    private int taskDelay;
 
     private final TaskDao taskDao;
     private static final Random random = new Random();
@@ -36,7 +39,7 @@ public class TaskProcessorService {
             }
             if(random.nextBoolean()) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(taskDelay);
                 } catch (InterruptedException e) {
                     log.warn("Exception occurred during sleep: {}", e.getMessage());
                 }
