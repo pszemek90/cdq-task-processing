@@ -1,7 +1,6 @@
 package com.cdq.taskprocessing.processorservice.consumer;
 
 import com.cdq.taskprocessing.model.TaskMessage;
-import com.cdq.taskprocessing.processorservice.model.ProcessingResult;
 import com.cdq.taskprocessing.processorservice.service.TaskProcessorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class TaskConsumer {
         log.info("Consuming message: {}", message);
         isMessageConsumed = true;
         payload = message;
-        ProcessingResult processingResult = taskProcessorService.processTask(message.input(), message.pattern());
+        taskProcessorService.processTask(message.uuid(), message.input(), message.pattern());
     }
 
     TaskMessage getPayload() {

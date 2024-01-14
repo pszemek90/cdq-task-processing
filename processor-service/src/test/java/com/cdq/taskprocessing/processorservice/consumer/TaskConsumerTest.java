@@ -1,21 +1,24 @@
 package com.cdq.taskprocessing.processorservice.consumer;
 
 import com.cdq.taskprocessing.model.TaskMessage;
+import com.cdq.taskprocessing.processorservice.service.TaskProcessorService;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 
 import java.util.Map;
 import java.util.UUID;
@@ -23,11 +26,16 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:0", "port=0"})
+@AutoConfigureTestDatabase
+@EmbeddedKafka(partitions = 1)
 class TaskConsumerTest {
+
+    @MockBean
+    private TaskProcessorService taskProcessorService;
 
     @Value("${kafka.task.topic.name}")
     private String taskTopicName;
+    @InjectMocks
     @Autowired
     private TaskConsumer taskConsumer;
     @Autowired
