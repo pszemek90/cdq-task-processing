@@ -32,7 +32,7 @@ class TaskRepositoryTest {
         Task task = new Task();
         task.setInput("testInput");
         task.setPattern("testPattern");
-        task.setCreatedDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
+        task.setCreatedDate(LocalDateTime.now());
         //when
         Task savedTask = taskRepository.save(task);
         //then

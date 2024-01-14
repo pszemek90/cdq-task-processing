@@ -5,7 +5,6 @@ import com.cdq.taskprocessing.database.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -23,7 +22,7 @@ public class TaskDao {
         Task task = new Task();
         task.setInput(input);
         task.setPattern(pattern);
-        task.setCreatedDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
+        task.setCreatedDate(LocalDateTime.now());
         Task savedTask = taskRepository.save(task);
         return savedTask.getId();
     }
@@ -31,6 +30,7 @@ public class TaskDao {
     public void updateProgress(UUID uuid, int progress) {
         Task taskToUpdate = getTaskById(uuid);
         taskToUpdate.setProgress(progress);
+        taskToUpdate.setModifiedDate(LocalDateTime.now());
         taskRepository.save(taskToUpdate);
     }
 
@@ -39,6 +39,7 @@ public class TaskDao {
         taskToUpdate.setBestPosition(bestPosition);
         taskToUpdate.setTypos(typos);
         taskToUpdate.setProgress(100);
+        taskToUpdate.setModifiedDate(LocalDateTime.now());
         taskRepository.save(taskToUpdate);
     }
 

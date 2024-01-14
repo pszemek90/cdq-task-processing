@@ -2,6 +2,7 @@ package com.cdq.taskprocessing.database.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Table(name = "tasks")
@@ -18,9 +19,9 @@ public class Task {
     private Integer typos;
     private int progress;
     @Column(name = "created_date")
-    private String createdDate;
+    private LocalDateTime createdDate;
     @Column(name = "modified_date")
-    private String modifiedDate;
+    private LocalDateTime modifiedDate;
 
     public UUID getId() {
         return id;
@@ -70,19 +71,19 @@ public class Task {
         this.progress = progress;
     }
 
-    public String getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public String getModifiedDate() {
+    public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(String modifiedDate) {
+    public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 }
