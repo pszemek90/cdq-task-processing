@@ -29,4 +29,9 @@ public class IntakeController {
     public ResponseEntity<Tasks> getAllTasks() {
         return ResponseEntity.ok(taskService.getAllTasks());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Tasks> getTask(@PathVariable UUID id) {
+        return ResponseEntity.ok(taskService.getTask(id));
+    }
 }

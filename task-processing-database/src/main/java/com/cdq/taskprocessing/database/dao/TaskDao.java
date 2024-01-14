@@ -46,7 +46,7 @@ public class TaskDao {
         return taskRepository.findAll();
     }
 
-    private Task getTaskById(UUID uuid) {
+    public Task getTaskById(UUID uuid) {
         return taskRepository.findById(uuid).orElseThrow(() -> new NoSuchElementException("No task found with id: " + uuid));
     }
 }

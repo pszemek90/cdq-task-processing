@@ -6,6 +6,7 @@ import com.cdq.taskprocessing.intakeservice.model.Tasks;
 import com.cdq.taskprocessing.model.TaskMessage;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,5 +28,9 @@ public class TaskService {
 
     public Tasks getAllTasks() {
         return new Tasks(TaskMapper.mapToDto(taskDao.getAllTasks()));
+    }
+
+    public Tasks getTask(UUID id) {
+        return new Tasks(List.of(TaskMapper.mapToDto(taskDao.getTaskById(id))));
     }
 }
